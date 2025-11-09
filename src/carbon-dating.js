@@ -17,9 +17,25 @@ const HALF_LIFE_PERIOD = 5730;
  * dateSample('WOOT!') => false
  *
  */
-function dateSample(/* sampleActivity */) {
-  // Remove line below and write your code here
-  throw new NotImplementedError('Not implemented');
+function dateSample(sampleActivity) {
+   // 1. Проверяем входные данные
+  if (
+    typeof sampleActivity !== 'string' ||
+    isNaN(Number(sampleActivity)) ||
+    Number(sampleActivity) <= 0 ||
+    Number(sampleActivity) > MODERN_ACTIVITY
+  ) {
+    return false;
+  }
+
+  // 2. Преобразуем строку в число
+  const activity = Number(sampleActivity);
+
+  // 3. Применяем формулу
+  const age = (HALF_LIFE_PERIOD / Math.LN2) * Math.log(MODERN_ACTIVITY / activity);
+
+  // 4. Возвращаем округленное значение возраста
+  return Math.ceil(age);
 }
 
 module.exports = {
